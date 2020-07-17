@@ -1,0 +1,28 @@
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("This is a demo app"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("txtInput", "Input the text to display"),
+      selectInput("slctInput", "Select the country you live in",
+                  choices = c("UK", "germany","France") )
+    ),
+    mainPanel(
+      paste("You are entering"),
+      textOutput("txtOutput"),
+      textOutput("countryOutput")
+    )
+  )
+)
+
+server <- shinyServer(function(input,output){
+  output$txtOutput <- renderText({
+    paste(input$txtInput)
+  })
+  output$countryOutput <- renderText({
+    paste(input$slctInput)
+  })
+})
+
+
